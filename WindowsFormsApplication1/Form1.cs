@@ -48,8 +48,11 @@ namespace WindowsFormsApplication1
                 DataContractSerializer serializer = new DataContractSerializer(typeof(List<Metric>));
                 Metrics = (List<Metric>)serializer.ReadObject(stream);
 
-                MetricsCombo.DisplayMember = "Name";
-                MetricsCombo.DataSource = Metrics;
+                MetricsCombo.Invoke(() =>
+                {
+                    MetricsCombo.DisplayMember = "Name";
+                    MetricsCombo.DataSource = Metrics;
+                });
             }
             catch (Exception e)
             {
@@ -66,6 +69,21 @@ namespace WindowsFormsApplication1
         private void MetricsCombo_SelectedValueChanged(object sender, EventArgs e)
         {
 
+        }
+    }
+
+    public static class ControlExtensions
+    {
+        public static void Invoke(this Control control, Action action)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(action), null);
+            }
+            else
+            {
+                action.Invoke();
+            }
         }
     }
 }
