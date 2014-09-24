@@ -66,7 +66,8 @@ namespace WindowsFormsApplication1
             public Action<List<Metric>> Callback { get; set; }
         }
 
-        private void MetricsCombo_SelectedValueChanged(object sender, EventArgs e)
+
+        private void MetricsCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

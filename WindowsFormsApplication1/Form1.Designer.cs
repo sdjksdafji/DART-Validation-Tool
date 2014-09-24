@@ -53,7 +53,7 @@
             this.MetricsCombo.Name = "MetricsCombo";
             this.MetricsCombo.Size = new System.Drawing.Size(333, 21);
             this.MetricsCombo.TabIndex = 0;
-            this.MetricsCombo.SelectedValueChanged += new System.EventHandler(this.MetricsCombo_SelectedValueChanged);
+            this.MetricsCombo.SelectedIndexChanged += new System.EventHandler(this.MetricsCombo_SelectedIndexChanged);
             // 
             // Instances
             // 
