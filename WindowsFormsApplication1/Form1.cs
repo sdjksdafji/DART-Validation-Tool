@@ -16,7 +16,8 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        private List<Metric> Metrics { get; set; }
+        private List<Metric> metrics { get; set; }
+        private List<Instance> instances { get; set; }
         public Form1()
         {
             InitializeComponent();
@@ -46,24 +47,24 @@ namespace WindowsFormsApplication1
                 Stream stream = response.GetResponseStream();
 
                 DataContractSerializer serializer = new DataContractSerializer(typeof(List<Metric>));
-                Metrics = (List<Metric>)serializer.ReadObject(stream);
+                this.metrics = (List<Metric>)serializer.ReadObject(stream);
 
                 MetricsList.Invoke(() =>
                 {
                     MetricsList.DisplayMember = "Name";
-                    MetricsList.DataSource = Metrics;
+                    MetricsList.DataSource = this.metrics;
                 });
             }
             catch (Exception e)
             {
-                // _dispatcher.BeginInvoke(() => _reportError(String.Format(CultureInfo.InvariantCulture, "Failed to retrieve metrics from {0}!\n\n{1}", request.HttpWebRequest.RequestUri, e)));
+                Console.WriteLine(e.ToString());
             }
         }
 
         private class GetMetricsRequest
         {
             public HttpWebRequest HttpWebRequest { get; set; }
-            public Action<List<Metric>> Callback { get; set; }
+           // public Action<List<Metric>> Callback { get; set; }
         }
 
 
@@ -76,14 +77,15 @@ namespace WindowsFormsApplication1
                 serverAInfo.FullName = ServerA.Text;
                 serverAInfo.WebServiceEndpointHint = "http://" + serverAInfo.FullName;
 
-                BeginGetInstancesForMetric(serverAInfo, null);
+                BeginGetInstancesForMetric(serverAInfo, selectedMetric);
             }
         }
 
 
         private void BeginGetInstancesForMetric(ServerInfo server, Metric metric)
         {
-            HttpWebRequest request = WebRequest.Create(server.GetFullRequestUrl("/metrics")) as HttpWebRequest;
+            String url = "/instances?metric=" + metric.Name;
+            HttpWebRequest request = WebRequest.Create(server.GetFullRequestUrl(url)) as HttpWebRequest;
             request.BeginGetResponse(EndGetInstancesForMetric, new GetInstancesRequest { HttpWebRequest = request });
         }
 
@@ -95,25 +97,25 @@ namespace WindowsFormsApplication1
                 HttpWebResponse response = request.HttpWebRequest.EndGetResponse(async) as HttpWebResponse;
                 Stream stream = response.GetResponseStream();
 
-                DataContractSerializer serializer = new DataContractSerializer(typeof(List<Metric>));
-                Metrics = (List<Metric>)serializer.ReadObject(stream);
+                DataContractSerializer serializer = new DataContractSerializer(typeof(List<Instance>));
+                this.instances = (List<Instance>)serializer.ReadObject(stream);
 
                 InstancesList.Invoke(() =>
                 {
                     InstancesList.DisplayMember = "Name";
-                    InstancesList.DataSource = Metrics;
+                    InstancesList.DataSource = this.instances;
                 });
             }
             catch (Exception e)
             {
-                // _dispatcher.BeginInvoke(() => _reportError(String.Format(CultureInfo.InvariantCulture, "Failed to retrieve metrics from {0}!\n\n{1}", request.HttpWebRequest.RequestUri, e)));
+                Console.WriteLine(e.ToString());
             }
         }
 
         private class GetInstancesRequest
         {
             public HttpWebRequest HttpWebRequest { get; set; }
-            public Action<List<Metric>> Callback { get; set; }
+            public Action<List<Instance>> Callback { get; set; }
         }
 
 
