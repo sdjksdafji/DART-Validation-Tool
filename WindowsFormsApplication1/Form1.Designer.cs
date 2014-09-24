@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MetricsCombo = new System.Windows.Forms.ComboBox();
-            this.Instances = new System.Windows.Forms.ComboBox();
+            this.MetricsList = new System.Windows.Forms.ComboBox();
+            this.InstancesList = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,22 +46,22 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // MetricsCombo
+            // MetricsList
             // 
-            this.MetricsCombo.FormattingEnabled = true;
-            this.MetricsCombo.Location = new System.Drawing.Point(65, 119);
-            this.MetricsCombo.Name = "MetricsCombo";
-            this.MetricsCombo.Size = new System.Drawing.Size(333, 21);
-            this.MetricsCombo.TabIndex = 0;
-            this.MetricsCombo.SelectedIndexChanged += new System.EventHandler(this.MetricsCombo_SelectedIndexChanged);
+            this.MetricsList.FormattingEnabled = true;
+            this.MetricsList.Location = new System.Drawing.Point(65, 119);
+            this.MetricsList.Name = "MetricsList";
+            this.MetricsList.Size = new System.Drawing.Size(333, 21);
+            this.MetricsList.TabIndex = 0;
+            this.MetricsList.SelectedIndexChanged += new System.EventHandler(this.MetricsList_SelectedIndexChanged);
             // 
-            // Instances
+            // InstancesList
             // 
-            this.Instances.FormattingEnabled = true;
-            this.Instances.Location = new System.Drawing.Point(65, 155);
-            this.Instances.Name = "Instances";
-            this.Instances.Size = new System.Drawing.Size(333, 21);
-            this.Instances.TabIndex = 1;
+            this.InstancesList.FormattingEnabled = true;
+            this.InstancesList.Location = new System.Drawing.Point(65, 155);
+            this.InstancesList.Name = "InstancesList";
+            this.InstancesList.Size = new System.Drawing.Size(333, 21);
+            this.InstancesList.TabIndex = 1;
             // 
             // dataGridView1
             // 
@@ -152,9 +152,9 @@
             // 
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.ServerA);
-            this.panel1.Controls.Add(this.MetricsCombo);
+            this.panel1.Controls.Add(this.MetricsList);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.Instances);
+            this.panel1.Controls.Add(this.InstancesList);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.LoadMetrics);
@@ -192,8 +192,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox MetricsCombo;
-        private System.Windows.Forms.ComboBox Instances;
+        private System.Windows.Forms.ComboBox MetricsList;
+        private System.Windows.Forms.ComboBox InstancesList;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
